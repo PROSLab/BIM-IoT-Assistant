@@ -42,3 +42,15 @@ Example queries:
 - "List the rooms located on the first floor"
 - "Information about a room"
 - "Which is the lowest temperature registered in the kitchen?"
+
+## Authors
+- Daniele Parumboiu
+- Massimo Callisto De Donato
+- Emanuele Laurenzi
+
+## Credits
+- University of Camerino (UNICAM)
+- University of Applied Sciences and Arts Northwestern Switzerland (FHNW)
+
+## License
+This project is licensed under the BSD-3-Clause License - see the LICENSE file for details.
