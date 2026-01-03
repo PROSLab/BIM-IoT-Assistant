@@ -12,9 +12,11 @@ BIM-IoT Assistant is a chatbot that integrates Building Information Modeling (BI
 
 ## Requirements
 - Python 3.8+
-- GraphDB instance running locally or remotely
-- InfluxDB instance running locally or remotely
-- Anthropic API key for Claude LLM
+- GraphDB instance
+- InfluxDB instance
+- Neo4J instance
+- LLM API key
+- Docker compose
 
 ## Installation and Setup
 1. Clone this repository
@@ -27,6 +29,9 @@ BIM-IoT Assistant is a chatbot that integrates Building Information Modeling (BI
 
 ### Run instances with Docker Compose
 You can run the databases using docker compose.
+Copy the provided `.env.example` in `.env` and edit the file based on your preferences. 
+Then start the docker compose with the command:
+
   ```
    docker compose up -d
    ```
@@ -87,7 +92,7 @@ BACKEND_TYPE = "graphdb"
    python import_sensor_data.py
    ```
    
-3. Check the imported data (optional)
+3. Check the imported data (optional). 
 From the query builder of InfluxDB you can use this query:
    ```
    from(bucket: "OpenSmartHome")
@@ -98,7 +103,7 @@ From the query builder of InfluxDB you can use this query:
 ### Importing Sensor Data to GraphDB
 1. Import the TTL file containing the building graph data through the GraphDB workbench interface
 
-### Importing Sensor Data to GraphDB
+### Importing Sensor Data to Neo4J
 1. Update the path to the TTL file `TTL_FILE_PATH`.
 
 2. Run the import script:
