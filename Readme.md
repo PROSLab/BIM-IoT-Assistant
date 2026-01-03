@@ -28,7 +28,6 @@ BIM-IoT Assistant is a chatbot that integrates Building Information Modeling (BI
 ### Run instances with Docker Compose
 You can run the databases using docker compose.
   ```
-   cd docker-compose
    docker compose up -d
    ```
 You can check the logs with `docker compose logs -f`
@@ -36,6 +35,7 @@ You can check the logs with `docker compose logs -f`
 Now you should be able to connect to the web interfaces od the databases:
    - InfluxDB (accessible at http://localhost:8086)
    - GraphDB (accessible at http://localhost:7200)
+   - Neo4j (accessible at http://localhost:7474)
 
 ### Configure InfluxDB (optional if you do not use the Docker Compose):
    - Access the InfluxDB UI at http://localhost:8086
@@ -46,8 +46,6 @@ Now you should be able to connect to the web interfaces od the databases:
 ### Configure GraphDB
    - Access the GraphDB UI at http://localhost:7200
    - Create a new repository named "smartHome"
-   - Import the TTL file containing the building graph data through the GraphDB workbench interface
-
 
 ## Environment Setup
 
@@ -66,6 +64,16 @@ INFLUXDB_ORG = "BIMIoT"
 INFLUXDB_DATASET_SOURCE = "/dataset/OSH_Measurements"
 
 GRAPHDB_URL = "http://localhost:7200/repositories/smartHome"
+
+# Neo4j Database Configuration
+NEO4J_URI = "bolt://localhost:7687"
+NEO4J_USERNAME = "neo4j user"
+NEO4J_PASSWORD = "neo4j user's password"
+
+TTL_FILE_PATH = "dataset/openSmartHome_Donkers.ttl"
+
+# graphdb (default) or neo4j
+BACKEND_TYPE = "graphdb"
 ```
 
 ## Data Import
@@ -90,14 +98,24 @@ From the query builder of InfluxDB you can use this query:
 ### Importing Sensor Data to GraphDB
 1. Import the TTL file containing the building graph data through the GraphDB workbench interface
 
+### Importing Sensor Data to GraphDB
+1. Update the path to the TTL file `TTL_FILE_PATH`.
+
+2. Run the import script:
+   ```bash
+   python import_ttl_neo4j.py
+   ```
+
 
 ## Usage
-You can run the prototype by executing the following command in the terminal:
-```
+You can select the preferred backend by changing the value of `BACKEND_TYPE`.
+The default is `graphdb` but you can change it in `neo4j`.
+
+You can run the prototype by running the following command in the terminal:
+```bash
 streamlit run bot.py
 ```
-
-This will start a Streamlit web application at address http://localhost:8501/ 
+This will start a Streamlit web application at the address http://localhost:8501/ 
 
 You can now interact with the BIM-IoT Assistant. You can ask questions about the building structure, elements, sensors, and their readings.
 

@@ -5,25 +5,50 @@ from langchain.tools import Tool
 from databases.graphdb_config import graphdb
 from llm import anthropic_claude_model
 from prompts.graph_sensor_prompt import SPARQL_SENSOR_PROMPT
+from prompts.neo_sensor_prompt import cypher_retrieve_sensor_prompt
 from tools.graphdb_building_retriever import building_assistant
 from tools.graphdb_influx_chain import GraphDBInfluxChain
+from tools.neo4j_building_retriever import cypher_qa
+from tools.neo4j_influx_chain import Neo4jInfluxChain
+from databases.neo_graph import neo4j_config
 
+import streamlit as st
 
-tools = [
-    Tool.from_function(
-        name="Retrieve Building Elements and Devices Information",
-        description="Tool which retrieves building related information such as structure, elements or sensors and devices contained",
-        func=building_assistant,
-        return_direct=True
-    ),
-    Tool.from_function(
-        name="Parameters Readings",
-        description="Retrieve value readings such as temperature or humidity measured by a sensor",
-        func=GraphDBInfluxChain.from_llm(anthropic_claude_model, sparql_generation_prompt=SPARQL_SENSOR_PROMPT,
-                                         graph=graphdb, verbose=True, ),
-        return_direct=True
-    ),
-]
+backend_type = st.secrets["BACKEND_TYPE"]
+st.write(f"Backend database type: {backend_type}")
+
+tools = []
+if backend_type == "neo4j":
+    tools = [
+        Tool.from_function(
+            name="Parameters Readings",
+            description="Retrieve value readings such as temperature or humidity measured by a sensor",
+            func = Neo4jInfluxChain.from_llm(anthropic_claude_model, graph=neo4j_config, verbose=True, top_k=100, cypher_prompt=cypher_retrieve_sensor_prompt, return_direct=True),
+            return_direct=True
+        ),
+        Tool.from_function(
+            name="Retrieve Building Elements and Devices Information",
+            description="Tool which retrieves building related information such as structure, elements or sensors and devices contained",
+            func = cypher_qa,
+            return_direct=True
+        ),
+    ]
+else:
+    tools = [
+        Tool.from_function(
+            name="Retrieve Building Elements and Devices Information",
+            description="Tool which retrieves building related information such as structure, elements or sensors and devices contained",
+            func=building_assistant,
+            return_direct=True
+        ),
+        Tool.from_function(
+            name="Parameters Readings",
+            description="Retrieve value readings such as temperature or humidity measured by a sensor",
+            func=GraphDBInfluxChain.from_llm(anthropic_claude_model, sparql_generation_prompt=SPARQL_SENSOR_PROMPT,
+                                             graph=graphdb, verbose=True, ),
+            return_direct=True
+        ),
+    ]
 
 agent_prompt = PromptTemplate.from_template("""
 
