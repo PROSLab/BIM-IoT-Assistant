@@ -3,7 +3,6 @@ from influxdb_client import InfluxDBClient
 from langchain.chains import LLMChain
 from langchain.prompts import PromptTemplate
 
-from databases.influx import influx_config
 from llm import anthropic_claude_model
 
 
@@ -93,7 +92,11 @@ class InfluxDBTool:
         self.query_generator = create_flux_query_generator(anthropic_claude_model, sensor_id)
 
         # Initialize the InfluxDB query executor
-        self.query_executor = influx_config
+        self.query_executor = InfluxDBQueryExecutor(
+            url=st.secrets["INFLUXDB_URL"],
+            token=st.secrets["INFLUXDB_TOKEN"],
+            org=st.secrets["INFLUXDB_ORG"],
+        )
 
     def run(self, task_description: str):
         """Generates and executes a Flux query for a given task description."""

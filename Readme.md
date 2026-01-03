@@ -22,13 +22,74 @@ BIM-IoT Assistant is a chatbot that integrates Building Information Modeling (BI
    ```
    pip install -r requirements.txt
    ```
-3. Configure the databases:
-   - Set up GraphDB with the smart home dataset
-   - Set up InfluxDB with the sensor data
-   - Update the connection details in `databases/graphdb_config.py` and `databases/influx.py`
-4. Configure the LLM:
-   - Get an API key from Anthropic
-   - Update the API key and model name in `llm.py`
+
+## Database Setup
+
+### Run instances with Docker Compose
+You can run the databases using docker compose.
+  ```
+   cd docker-compose
+   docker compose up -d
+   ```
+You can check the logs with `docker compose logs -f`
+
+Now you should be able to connect to the web interfaces od the databases:
+   - InfluxDB (accessible at http://localhost:8086)
+   - GraphDB (accessible at http://localhost:7200)
+
+### Configure InfluxDB (optional if you do not use the Docker Compose):
+   - Access the InfluxDB UI at http://localhost:8086
+   - Create a new organization named "BIMIoT"
+   - Create a new bucket named "OpenSmartHome"
+   - Generate an API token and save it for later use
+
+### Configure GraphDB
+   - Access the GraphDB UI at http://localhost:7200
+   - Create a new repository named "smartHome"
+   - Import the TTL file containing the building graph data through the GraphDB workbench interface
+
+
+## Environment Setup
+
+1. Create a `.streamlit/secrets.toml` file with the following environment variables (see `.streamlit/secrets.toml.example`):
+
+```toml
+# LLM API Ke
+LLM_API_KEY = "your-anthropic-api-key"
+
+# InfluxDB Configuration
+
+# InfluxDB Configuration
+INFLUXDB_URL = "http://localhost:8086"
+INFLUXDB_TOKEN = "your-influxdb-token"
+INFLUXDB_ORG = "BIMIoT"
+INFLUXDB_DATASET_SOURCE = "/dataset/OSH_Measurements"
+
+GRAPHDB_URL = "http://localhost:7200/repositories/smartHome"
+```
+
+## Data Import
+
+### Importing Sensor Data to InfluxDB
+
+1. Update the path to your sensor data CSV files defined in `INFLUXDB_DATASET_SOURCE`.
+
+2. Run the import script:
+   ```bash
+   python import_sensor_data.py
+   ```
+   
+3. Check the imported data (optional)
+From the query builder of InfluxDB you can use this query:
+   ```
+   from(bucket: "OpenSmartHome")
+   |> range(start: 0) // Cerca dall'origine (Unix epoch) fino ad oggi
+   |> first()         // Mostra solo il primo dato inserito in assoluto
+   ```
+
+### Importing Sensor Data to GraphDB
+1. Import the TTL file containing the building graph data through the GraphDB workbench interface
+
 
 ## Usage
 You can run the prototype by executing the following command in the terminal:
@@ -36,7 +97,9 @@ You can run the prototype by executing the following command in the terminal:
 streamlit run bot.py
 ```
 
-This will start a Streamlit web application where you can interact with the BIM-IoT Assistant. You can ask questions about the building structure, elements, sensors, and their readings.
+This will start a Streamlit web application at address http://localhost:8501/ 
+
+You can now interact with the BIM-IoT Assistant. You can ask questions about the building structure, elements, sensors, and their readings.
 
 Example queries:
 - "List the rooms located on the first floor"

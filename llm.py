@@ -1,8 +1,17 @@
 ##LLM configuration file
 import streamlit as st
-from langchain_anthropic import ChatAnthropic
+from langchain_openai import ChatOpenAI
 
-anthropic_claude_model = ChatAnthropic(temperature=0,
-                                       anthropic_api_key="ANTHROPIC_KEY",
-                                       model_name="CHOOSE_MODEL",)
+print("Running with model: " + st.secrets["LLM_MODEL"])
 
+# Configurazione OpenRouter
+anthropic_claude_model = ChatOpenAI(
+    model=st.secrets["LLM_MODEL"],
+    openai_api_key=st.secrets["LLM_API_KEY"],
+    openai_api_base="https://openrouter.ai/api/v1",
+    temperature=0,
+    default_headers={
+        "HTTP-Referer": "http://localhost:8501", # Obbligatorio per OpenRouter (tua app)
+        "X-Title": "BIM-IoT-Assistant",          # Obbligatorio per OpenRouter
+    }
+)

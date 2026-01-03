@@ -1,0 +1,36 @@
+services:
+  influxdb:
+    image: influxdb:2.7
+    container_name: influxdb_bim_iot
+    ports:
+      - "8086:8086"
+    volumes:
+      - bim-iot_influxdb_data:/var/lib/influxdb2
+      - bim-iot_influxdb_config:/etc/influxdb2
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=${INFLUXDB_USER}
+      - DOCKER_INFLUXDB_INIT_PASSWORD=${INFLUXDB_PASSWORD}
+      - DOCKER_INFLUXDB_INIT_ORG=${INFLUXDB_ORG}
+      - DOCKER_INFLUXDB_INIT_BUCKET=${INFLUXDB_BUCKET}
+    networks:
+      - bim-iot_network
+
+  graphdb:
+    image: ontotext/graphdb:10.7.0
+    container_name: graphdb_bim_iot
+    ports:
+      - "7200:7200"
+    volumes:
+      - bim-iot_graphdb_data:/opt/graphdb/home
+    networks:
+      - bim-iot_network
+
+networks:
+  bim-iot_network:
+    driver: bridge
+
+volumes:
+  bim-iot_influxdb_data:
+  bim-iot_influxdb_config:
+  bim-iot_graphdb_data:
