@@ -1,7 +1,8 @@
 from langchain_community.graphs import OntotextGraphDBGraph
+import streamlit as st
 
 graphdb = OntotextGraphDBGraph(
-    query_endpoint="http://localhost:7200/repositories/smartHomeDonkers",
+    query_endpoint=st.secrets["GRAPHDB_URL"],
     query_ontology = """
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
