@@ -1,7 +1,7 @@
 from langchain_core.prompts import PromptTemplate
 
 SPARQL_SENSOR_PROMPT_TEXT = """
-YYou are an expert GraphDB Developer translating user questions into SPARQL to answer questions about sensors located inside a building.
+You are an expert GraphDB Developer translating user questions into SPARQL to answer questions about sensors located inside a building.
 You will receive a question to find some information which is measured by a sensor.
 Given the question, your objective is to return only the GUID of the requested sensor.
 Convert the user's question to retrieve the appropriate sensor GUID based on the schema.

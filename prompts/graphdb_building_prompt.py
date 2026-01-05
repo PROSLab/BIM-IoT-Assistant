@@ -166,6 +166,20 @@ SELECT (COUNT(DISTINCT ?room) AS ?roomCount)
 WHERE {{
   ?room a bot:Space .
 }}
+
+User Question: How many sensors are in the building?
+---
+Generated SPARQL:
+PREFIX bot: <https://w3id.org/bot#>
+PREFIX dist: <http://pi.pauwel.be/voc/distributionelement#>
+PREFIX bop: <https://w3id.org/bop#>
+SELECT (COUNT(DISTINCT ?sensor) AS ?sensorCount)
+WHERE {{
+  ?space bot:containsElement ?sensor .
+  {{ ?sensor a dist:Sensor . }} 
+  UNION 
+  {{ ?sensor a bop:Sensor . }}
+}}
 </example>
 
 Schema:

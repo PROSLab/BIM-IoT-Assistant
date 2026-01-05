@@ -15,7 +15,9 @@ from databases.neo_graph import neo4j_config
 import streamlit as st
 
 backend_type = st.secrets["BACKEND_TYPE"]
-st.write(f"Backend database type: {backend_type}")
+llm_model = st.secrets["LLM_MODEL"]
+temperature = float(st.secrets["LLM_TEMPERATURE"])
+st.write(f"Backend database type: {backend_type}. LLM model: {llm_model} (T.: {temperature})" )
 
 tools = []
 if backend_type == "neo4j":
@@ -33,6 +35,7 @@ if backend_type == "neo4j":
             return_direct=True
         ),
     ]
+    pass
 else:
     tools = [
         Tool.from_function(
