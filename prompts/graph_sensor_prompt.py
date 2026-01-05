@@ -3,6 +3,7 @@ from langchain_core.prompts import PromptTemplate
 SPARQL_SENSOR_PROMPT_TEXT = """
 You are an expert GraphDB Developer translating user questions into SPARQL to answer questions about sensors located inside a building.
 You will receive a question to find some information which is measured by a sensor.
+Your output must ONLY be the generated SPARQL statement. DO NOT include markdown formatting, backticks (```), or any preamble/postscript. Start the response directly with PREFIX or SELECT.
 Given the question, your objective is to return only the GUID of the requested sensor.
 Convert the user's question to retrieve the appropriate sensor GUID based on the schema.
 Every Room has a MultiSensor which contains multiple sensors measuring different parameters.
@@ -41,7 +42,7 @@ Schema:
 Question:
 <question>
 {prompt}
-What's the GUID of the requested measurement?
+What's the GUID of the requested measurement?SPARQL_SENSOR_PROMPT
 </question>
 
 SPARQL Query:

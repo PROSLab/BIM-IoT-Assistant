@@ -36,6 +36,7 @@ def create_flux_query_generator(llm, sensor_id):
     <sensor_id>""" + sensor_id + """</sensor_id>
     
     3. When generating the query, adhere to the following structure and requirements:
+       - DO NOT include markdown formatting, don not add backticks (```), do not add 'flux, or any preamble/postscript. 
        - Use the "from(bucket: "OpenSmartHome")" as the starting point of your query.
        - Use the range() function to specify the time range.
        - Use filter() functions to select the correct measurement and sensor identifier.
@@ -103,7 +104,19 @@ class InfluxDBTool:
         # Generate the Flux query
         generated_query = self.query_generator.invoke(task_description)['text']
         print("Generated Flux Query:", generated_query)
+        generated_query = self.clean_quotas(generated_query)
+        print("NEW: generated Flux Query:", generated_query)
+
 
         # Execute the generated Flux query on InfluxDB
         execution_result = self.query_executor.execute_query(generated_query)
         return execution_result
+
+    def clean_quotas(self, generated_query):
+        # Rimuove i blocchi di codice markdown se presenti
+        generated_output = generated_query
+        if "```" in generated_query:
+            generated_output = generated_query.split("```")[1].split("```")[0]
+        elif "```" in generated_query:
+            generated_output = generated_query.split("```")[1].split("```")[0]
+        return generated_output.strip()
