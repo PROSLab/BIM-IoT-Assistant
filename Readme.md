@@ -9,34 +9,45 @@ BIM-IoT Assistant is a chatbot that integrates Building Information Modeling (BI
 - [**dataset/**](dataset): Contains the data files for the smart home example
 
 ## Requirements
+- Docker compose
+- OpenRouter API key
 - Python 3.8+
 - GraphDB instance
 - InfluxDB instance
 - Neo4J instance
-- LLM API key
-- Docker compose
-
 
 ## Installation and Setup
+
+This step is only required to import the initial dataset into the databases.
+
 1. Clone this repository
-2. Install the required dependencies:
+2. Create and activate a virtual environment
+   ```
+   # Windows
+   python -m venv venv
+   venv\Scripts\activate
+   
+   # macOS/Linux
+   python -m venv venv
+   source venv/bin/activate
+   ```
+3. Install the required dependencies:
    ```
    pip install -r requirements.txt
    ```
 
-## Database Setup
+### Database Setup
 
-### Run instances with Docker Compose
 You can run the databases using docker compose.
 1. Copy the provided [`.env.example`](.env.example) in `.env` and edit the file based on your preferences.
-2. Then start the docker compose with the command:
+2. Start the docker compose with the command:
    ```
    docker compose up -d
    ```
 
 3. You can check the logs with `docker compose logs -f`
 
-Now you should be able to connect to the web interfaces od the databases:
+Now, you should be able to connect at
    - InfluxDB (accessible at http://localhost:8086)
    - GraphDB (accessible at http://localhost:7200)
    - Neo4j (accessible at http://localhost:7474)
@@ -51,14 +62,15 @@ Now you should be able to connect to the web interfaces od the databases:
    - Access the GraphDB UI at http://localhost:7200
    - Create a new repository named "smartHome"
 
-## Environment Setup
+### Application Environment Setup
+To use the application, a proper dataset must be loaded in the databases. 
+1. 
+2. Copy the file [`.streamlit/secrets.toml.example`](.streamlit/secrets.toml.example) to `.streamlit/secrets.toml`).
 
-1. Copy the fine [`.streamlit/secrets.toml.example`](.streamlit/secrets.toml.example) to `.streamlit/secrets.toml`).
-
-2. Edit the variable choosing the LLM model and the database type (GraphDB or Neo4j). For Example:
+3. Edit the variable to choose the LLM model and the database type (GraphDB or Neo4j). For example:
 ```toml
-# LLM API Ke
-LLM_API_KEY = "your-anthropic-api-key"
+# LLM API Key
+LLM_API_KEY = "your-openrouter-api-key"
 
 # InfluxDB Configuration
 
@@ -81,46 +93,58 @@ TTL_FILE_PATH = "dataset/openSmartHome_Donkers.ttl"
 BACKEND_TYPE = "graphdb"
 ```
 
-## Data Import
+### Data Import
 
-### Importing Sensor Data to InfluxDB
+**IoT sensors dataset**
 
-1. If needed, update the path to your sensor data CSV files defined in `INFLUXDB_DATASET_SOURCE` (see [`.streamlit/secrets.toml.example`](.streamlit/secrets.toml.example)) 
+InfluxDB default dataset refers to the sensor data CSV files defined in `INFLUXDB_DATASET_SOURCE` (see [`.streamlit/secrets.toml.example`](.streamlit/secrets.toml.example)).
 
-2. Run the import script:
+To import the dataset, proceed as follows:
+
+1. Run the import script:
    ```bash
    python import_sensor_data.py
    ```
    
-3. Check the imported data (optional). 
+2. Check the imported data (optional). 
 From the query builder of InfluxDB you can use this query:
    ```
    from(bucket: "OpenSmartHome")
-   |> range(start: 0) // Cerca dall'origine (Unix epoch) fino ad oggi
-   |> first()         // Mostra solo il primo dato inserito in assoluto
+   |> range(start: 0) 
+   |> first() 
    ```
 
-### Importing Sensor Data to GraphDB
-1. Import the TTL file containing the building graph data through the GraphDB workbench interface
+**Importing RDF dataset to GraphDB**
 
-### Importing Sensor Data to Neo4J
-1. Update the path to the TTL file `TTL_FILE_PATH`.
+The BIM dataset to load in GraphDB refers to the `TTL_FILE_PATH` file defined in `INFLUXDB_DATASET_SOURCE` (see [`.streamlit/secrets.toml.example`](.streamlit/secrets.toml.example))
+TTL file can be imported through the GraphDB workbench interface
+
+**Importing LPG dataset to Neo4j**
+1. Update the path to the TTL file `TTL_FILE_PATH` (see [`.streamlit/secrets.toml.example`](.streamlit/secrets.toml.example)).
 
 2. Run the import script:
    ```bash
    python import_ttl_neo4j.py
    ```
 
-
-## Usage
+## Usage of the Virtual Assistant
 You can select the preferred backend by changing the value of `BACKEND_TYPE` ([`.streamlit/secrets.toml.example`](.streamlit/secrets.toml.example)).
 The default is `graphdb` but you can change it in `neo4j`.
 
-You can run the prototype by running the following command in the terminal:
+You can restart the docker compose of the streamlit application:
+
+```bash
+docker compose stop streamlit
+docker compose rm streamlit
+docker compose up -d streamlit
+```
+
+You can also run the prototype by running the following command in the terminal:
 ```bash
 streamlit run bot.py
 ```
-This will start a Streamlit web application at the address http://localhost:8501/ 
+
+To access the Streamlit web application, open the web browser at the address http://localhost:8501/ 
 
 You can now interact with the BIM-IoT Assistant. You can ask questions about the building structure, elements, sensors, and their readings.
 
@@ -138,5 +162,12 @@ Example queries:
 - University of Camerino (UNICAM)
 - University of Applied Sciences and Arts Northwestern Switzerland (FHNW)
 
+## References
+This work is inspired by:
+
+- Callisto De Donato, M., Laurenzi, E., & Porumboiu, D. (2025). _A hybrid artificial intelligence to support information retrieval in smart buildings_. 
+Joint Proceedings of the BIR 2025 Workshops and Doctoral Consortium, 4034, 157–169. https://ceur-ws.org/Vol-4034/paper79.pdf
+
 ## License
 This project is licensed under the BSD-3-Clause License - see the LICENSE file for details.
+
