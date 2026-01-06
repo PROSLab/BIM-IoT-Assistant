@@ -16,6 +16,9 @@ BIM-IoT Assistant is a chatbot that integrates Building Information Modeling (BI
 - InfluxDB instance
 - Neo4J instance
 
+**Note**: current implementation uses OpenRouter as the default LLM API provider. However, the system is designed to be flexible - you can easily switch to a different LLM API provider by modifying the implementation in [`llm.py`](llm.py). This modular design allows for easy integration of custom LLM solutions or alternative API providers.
+
+
 ## Installation and Setup
 
 This step is only required to import the initial dataset into the databases.
