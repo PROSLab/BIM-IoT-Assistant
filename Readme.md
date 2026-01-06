@@ -3,12 +3,10 @@
 ## Description
 BIM-IoT Assistant is a chatbot that integrates Building Information Modeling (BIM) data with Internet of Things (IoT) sensor data to provide intelligent responses to queries about buildings and their sensor readings. The system uses a knowledge graph (GraphDB) to store building information and time-series database (InfluxDB) to store sensor data.
 
-### Directory Structure
-- **competency-questions/**: Contains a PDF with questions the system should be able to answer
-- **databases/**: Configuration files for GraphDB and InfluxDB connections
-- **dataset/**: Contains the data files for the smart home example
-- **prompts/**: Contains prompt templates for the LLM to generate SPARQL queries
-- **tools/**: Contains tools for retrieving data from GraphDB and InfluxDB
+### Relevant Directories
+- [**competency-questions/**](competency-questions): Contains a PDF with questions the system should be able to answer
+- [**prompts/**](prompts): Contains prompt templates for the LLM to generate SPARQL queries
+- [**dataset/**](dataset): Contains the data files for the smart home example
 
 ## Requirements
 - Python 3.8+
@@ -17,6 +15,7 @@ BIM-IoT Assistant is a chatbot that integrates Building Information Modeling (BI
 - Neo4J instance
 - LLM API key
 - Docker compose
+
 
 ## Installation and Setup
 1. Clone this repository
@@ -29,13 +28,13 @@ BIM-IoT Assistant is a chatbot that integrates Building Information Modeling (BI
 
 ### Run instances with Docker Compose
 You can run the databases using docker compose.
-Copy the provided `.env.example` in `.env` and edit the file based on your preferences. 
-Then start the docker compose with the command:
-
-  ```
+1. Copy the provided [`.env.example`](.env.example) in `.env` and edit the file based on your preferences.
+2. Then start the docker compose with the command:
+   ```
    docker compose up -d
    ```
-You can check the logs with `docker compose logs -f`
+
+3. You can check the logs with `docker compose logs -f`
 
 Now you should be able to connect to the web interfaces od the databases:
    - InfluxDB (accessible at http://localhost:8086)
@@ -54,8 +53,9 @@ Now you should be able to connect to the web interfaces od the databases:
 
 ## Environment Setup
 
-1. Create a `.streamlit/secrets.toml` file with the following environment variables (see `.streamlit/secrets.toml.example`):
+1. Copy the fine [`.streamlit/secrets.toml.example`](.streamlit/secrets.toml.example) to `.streamlit/secrets.toml`).
 
+2. Edit the variable choosing the LLM model and the database type (GraphDB or Neo4j). For Example:
 ```toml
 # LLM API Ke
 LLM_API_KEY = "your-anthropic-api-key"
@@ -85,7 +85,7 @@ BACKEND_TYPE = "graphdb"
 
 ### Importing Sensor Data to InfluxDB
 
-1. Update the path to your sensor data CSV files defined in `INFLUXDB_DATASET_SOURCE`.
+1. If needed, update the path to your sensor data CSV files defined in `INFLUXDB_DATASET_SOURCE` (see [`.streamlit/secrets.toml.example`](.streamlit/secrets.toml.example)) 
 
 2. Run the import script:
    ```bash
@@ -113,7 +113,7 @@ From the query builder of InfluxDB you can use this query:
 
 
 ## Usage
-You can select the preferred backend by changing the value of `BACKEND_TYPE`.
+You can select the preferred backend by changing the value of `BACKEND_TYPE` ([`.streamlit/secrets.toml.example`](.streamlit/secrets.toml.example)).
 The default is `graphdb` but you can change it in `neo4j`.
 
 You can run the prototype by running the following command in the terminal:

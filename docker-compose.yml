@@ -42,24 +42,20 @@ services:
     networks:
       - bim-iot_network
 
-  streamlit:
-    build: .
-    container_name: streamlit_bim_iot
-    ports:
-      - "8501:8501"
-    volumes:
-      - .:/app
-      - ./.streamlit:/app/.streamlit
-    depends_on:
-      - influxdb
-      - graphdb
-      - neo4j
-    networks:
-      - bim-iot_network
-#    environment:
-#      - INFLUXDB_URL=http://influxdb:8086
-#      - GRAPHDB_URL=http://graphdb:7200/repositories/smartHome
-#      - NEO4J_URI=bolt://neo4j:7687
+#  streamlit:
+#    build: .
+#    container_name: streamlit_bim_iot
+#    ports:
+#      - "8501:8501"
+#    volumes:
+#      - .:/app
+#      - ./.streamlit:/app/.streamlit
+#    depends_on:
+#      - influxdb
+#      - graphdb
+#      - neo4j
+#    networks:
+#      - bim-iot_network
 
 networks:
   bim-iot_network:
