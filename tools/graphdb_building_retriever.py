@@ -11,5 +11,6 @@ building_assistant = OntotextGraphDBQAChain.from_llm(
     qa_prompt=SPARQL_QA_BIM_PROMPT,
     graph=graphdb,
     verbose=True,
-    allow_dangerous_requests=True
+    allow_dangerous_requests=True,
+    handle_parsing_errors=True
 )

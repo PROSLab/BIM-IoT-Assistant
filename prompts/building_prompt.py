@@ -26,14 +26,18 @@ SPARQL_QA_BIM_PROMPT = PromptTemplate(
     input_variables=["context", "prompt"], template=SPARQL_QA_BIM_TEMPLATE
 )
 
-CYPHER_BUILDING_PROMPT_TEXT = '''You are an expert Neo4j Developer translating user questions into Cypher to answer questions about a building and the elements contained in it.
+CYPHER_BUILDING_PROMPT_TEXT = '''
+You are an expert Neo4j Developer translating user questions into Cypher to answer questions about a building and the elements contained in it.
 
 Use only the provided relationship types and properties in the schema.
 Do not use any other relationship types or properties that are not provided.
 
 Your answers should be concise and to the point. Do not include any additional information that is not requested.
 Answer with only the generated Cypher statement.
-Try to use meaningful aliases for the nodes and relationships in the query.
+Try to use meaningful aliases for the nodes and relationships in the query..
+
+
+### EXAMPLES
 Here there are some examples of how to respond to the user's question:
 <example>
 Tell me about the bathroom in the building
@@ -50,6 +54,81 @@ Which walls are adjacent to the kitchen?
 MATCH (space:Space)-[c:adjacentElement]-(wall:Wall)
 WHERE space.longNameIfcSpatialStructureElement_attribute_simple CONTAINS 'Kitchen'
 RETURN space.longNameIfcSpatialStructureElement_attribute_simple, c, wall
+
+What are the measures of the wall with the Guid "05b047f8-dd03-4cd9-a50c-d5d18c6ba6a2"?
+MATCH (w:Wall)-[:hasProperty]->(m:Resource)-[:hasPropertyState]->(h:Resource)
+WHERE w.hasGuid = "05b047f8-dd03-4cd9-a50c-d5d18c6ba6a2"
+RETURN labels(m), h.hasValue
+
+Which rooms are located on the first floor?
+MATCH (a:Storey)-[:hasSpace]-(s:Space)
+WHERE a.label CONTAINS 'Level 1'
+RETURN s.longNameIfcSpatialStructureElement_attribute_simple, a
+
+Return more details about the wall with the Guid "05b047f8-dd03-4cd9-a50c-d5d18c6ba6a2":
+MATCH (w:Wall)-[a]->(m)-[b]->(c)
+WHERE w.hasGuid = "05b047f8-dd03-4cd9-a50c-d5d18c6ba6a2"
+RETURN w, a, m, b, c
+
+What is the height of the wall with the Guid "05b047f8-dd03-4cd9-a50c-d5d18c6ba6a2"?
+MATCH (w:Wall)-[:hasProperty]->(m:Height)-[:hasPropertyState]->(h:Resource)
+WHERE w.hasGuid = "05b047f8-dd03-4cd9-a50c-d5d18c6ba6a2"
+RETURN labels(m), h.hasValue
+</example>
+Schema:
+<schema>
+{schema}
+</schema>
+
+Question:
+<question>
+{question}
+</question>
+
+Cypher Query:'''
+
+CYPHER_BUILDING_PROMPT_TEXT__ = '''
+You are an expert Neo4j Developer translating user questions into Cypher to answer questions about a building and the elements contained in it.
+
+### OUTPUT RULES
+1. **Selective Projection**: NEVER return full nodes (e.g., RETURN wall) or generic relationships (e.g., RETURN r). 
+   - ALWAYS return specific, human-readable properties like names, labels, or values.
+   - ALWAYS use the 'AS' operator to create simple aliases for the output (e.g., AS RoomName, AS WallGuid, AS PropertyValue).
+   
+2. **Metadata Exclusion**: Do not include technical URIs, internal IDs (batid), or globalId attributes unless explicitly requested.
+
+3. **Topological Adjacency**: To identify adjacent rooms, you must traverse through shared wall elements:
+   (Space)-[:adjacentElement]->(Wall)<-[:adjacentElement]-(Space).
+
+4. **Raw Output**: Return ONLY the Cypher statement. Do not include markdown backticks (```), preamble, or any conversational text. Start directly with MATCH or WITH.
+
+5. **Identity Check**: When comparing two spaces, always ensure they are distinct: `AND r1 <> r2`.
+
+
+
+### EXAMPLES
+
+<example>
+Tell me about the bathroom in the building
+MATCH (space:Space)-[r]-(s)
+WHERE space.longNameIfcSpatialStructureElement_attribute_simple CONTAINS 'Bathroom'
+RETURN space.longNameIfcSpatialStructureElement_attribute_simple, r,s
+
+What can be found in the kitchen?
+MATCH (space:Space)-[c:containsElement]-(element)
+WHERE space.longNameIfcSpatialStructureElement_attribute_simple CONTAINS 'Kitchen'
+RETURN space.longNameIfcSpatialStructureElement_attribute_simple, c, element
+
+Which walls are adjacent to the kitchen?
+MATCH (space:Space)-[c:adjacentElement]-(wall:Wall)
+WHERE space.longNameIfcSpatialStructureElement_attribute_simple CONTAINS 'Kitchen'
+RETURN space.longNameIfcSpatialStructureElement_attribute_simple, c, wall
+
+Which room are adjacent to the Kitchen?
+MATCH (r1:Space)-[:adjacentElement]->(w:Wall)<-[:adjacentElement]-(r2:Space)
+WHERE r1.longNameIfcSpatialStructureElement_attribute_simple CONTAINS 'Kitchen'
+AND r1 <> r2
+RETURN DISTINCT r2.longNameIfcSpatialStructureElement_attribute_simple AS AdjacentRoom
 
 What are the measures of the wall with the Guid "05b047f8-dd03-4cd9-a50c-d5d18c6ba6a2"?
 MATCH (w:Wall)-[:hasProperty]->(m:Resource)-[:hasPropertyState]->(h:Resource)
@@ -82,6 +161,98 @@ Question:
 </question>
 
 Cypher Query:'''
+
+CYPHER_BUILDING_PROMPT_TEXT_old = '''
+You are an expert Neo4j Developer translating user questions into Cypher to answer questions about a building and the elements contained in it.
+
+Use only the provided relationship types and properties in the schema.
+Do not use any other relationship types or properties that are not provided.
+Extract only the names of the rooms and ignore technical IDs or URIs.
+
+Your answers should be concise and to the point. Do not include any additional information that is not requested.
+Answer with only the generated Cypher statement.
+
+Try to use meaningful aliases for the nodes and relationships in the query.
+
+### OUTPUT RULES
+1. **Selective Projection**: NEVER return full nodes (e.g., RETURN wall) or generic relationships (e.g., RETURN r). 
+   - ALWAYS return specific, human-readable properties like names, labels, or values.
+   - ALWAYS use the 'AS' operator to create simple aliases for the output (e.g., AS RoomName, AS WallGuid, AS PropertyValue).
+   
+2. **Metadata Exclusion**: Do not include technical URIs, internal IDs (batid), or globalId attributes unless explicitly requested.
+
+3. **Topological Adjacency**: To identify adjacent rooms, you must traverse through shared wall elements:
+   (Space)-[:adjacentElement]->(Wall)<-[:adjacentElement]-(Space).
+
+4. **Raw Output**: Return ONLY the Cypher statement. Do not include markdown backticks (```), preamble, or any conversational text. Start directly with MATCH or WITH.
+
+5. **Identity Check**: When comparing two spaces, always ensure they are distinct: `AND r1 <> r2`.
+
+
+
+### EXAMPLES
+<example>
+
+Question: Tell me about the bathroom in the building
+Cypher: MATCH (space:Space)-[r]-(s)
+WHERE space.longNameIfcSpatialStructureElement_attribute_simple CONTAINS 'Bathroom'
+RETURN space.longNameIfcSpatialStructureElement_attribute_simple, r,s
+
+Question: What can be found in the kitchen?
+Cypher: MATCH (space:Space)-[c:containsElement]-(element)
+WHERE space.longNameIfcSpatialStructureElement_attribute_simple CONTAINS 'Kitchen'
+RETURN space.longNameIfcSpatialStructureElement_attribute_simple, c, element
+
+Question: Which walls are adjacent to the kitchen?
+Cypher: MATCH (space:Space)-[c:adjacentElement]-(wall:Wall)
+WHERE space.longNameIfcSpatialStructureElement_attribute_simple CONTAINS 'Kitchen'
+RETURN space.longNameIfcSpatialStructureElement_attribute_simple AS AdjacentRoom, c, wall
+
+Question: Which rooms are adjacent to the Kitchen?
+Cypher: MATCH (r1:Space)-[:adjacentElement]->(w:Wall)<-[:adjacentElement]-(r2:Space) 
+WHERE r1.longNameIfcSpatialStructureElement_attribute_simple CONTAINS 'Kitchen' AND r1 <> r2 
+RETURN DISTINCT r2.longNameIfcSpatialStructureElement_attribute_simple AS AdjacentRoom
+
+Question: What are the measures of the wall with the Guid "05b047f8-dd03-4cd9-a50c-d5d18c6ba6a2"?
+Cypher: MATCH (w:Wall)-[:hasProperty]->(m:Resource)-[:hasPropertyState]->(h:Resource)
+WHERE w.hasGuid = "05b047f8-dd03-4cd9-a50c-d5d18c6ba6a2"
+RETURN labels(m), h.hasValue
+
+Question: Which rooms are located on the first floor?
+Cypher: MATCH (a:Storey)-[:hasSpace]-(s:Space)
+WHERE a.label CONTAINS 'Level 1'
+RETURN s.longNameIfcSpatialStructureElement_attribute_simple as roomName, a.label
+
+Question: Return more details about the wall with the Guid "05b047f8-dd03-4cd9-a50c-d5d18c6ba6a2":
+Cypher: MATCH (w:Wall)-[a]->(m)-[b]->(c)
+WHERE w.hasGuid = "05b047f8-dd03-4cd9-a50c-d5d18c6ba6a2"
+RETURN w, a, m, b, c
+
+Question: Which rooms are adjacent to the Kitchen?
+Cypher: MATCH (r1:Space)-[:adjacentElement]->(w:Wall)<-[:adjacentElement]-(r2:Space) WHERE r1.longNameIfcSpatialStructureElement_attribute_simple CONTAINS 'Kitchen' AND r1 <> r2 RETURN DISTINCT r2.longNameIfcSpatialStructureElement_attribute_simple AS RoomName
+
+Question: What wall separates the Kitchen from the Bathroom?
+Cypher: MATCH (k:Space)-[:adjacentElement]->(w:Wall)<-[:adjacentElement]-(t:Space) WHERE k.longNameIfcSpatialStructureElement_attribute_simple CONTAINS 'Kitchen' AND t.longNameIfcSpatialStructureElement_attribute_simple CONTAINS 'Bathroom' RETURN w.nameIfcRoot_attribute_simple AS WallName, w.hasGuid AS WallGuid
+
+Question: What is the height of the wall with Guid "05b047f8-dd03-4cd9-a50c-d5d18c6ba317"?
+Cypher: MATCH (w:Wall {hasGuid: "05b047f8-dd03-4cd9-a50c-d5d18c6ba317"})-[:hasProperty]->(p)-[:hasPropertyState]->(s) WHERE labels(p) SINGLE(l IN labels(p) WHERE l CONTAINS 'Height') RETURN s.hasValue AS WallHeight
+
+Question: What rooms are on the first floor?
+Cypher: MATCH (storey:Storey)-[:hasSpace]->(space:Space) WHERE storey.label CONTAINS 'Level 1' RETURN space.longNameIfcSpatialStructureElement_attribute_simple AS RoomName
+
+Question: What elements are contained in the Bathroom?
+Cypher: MATCH (s:Space)-[:containsElement]->(e) WHERE s.longNameIfcSpatialStructureElement_attribute_simple CONTAINS 'Bathroom' RETURN e.nameIfcRoot_attribute_simple AS ElementName, labels(e)[0] AS ElementType
+
+</example>
+
+### SCHEMA
+{schema}
+
+### QUESTION
+{question}
+
+### CYPHER QUERY (Raw text only):
+'''
 
 CYPHER_BUILDING_PROMPT = PromptTemplate.from_template(CYPHER_BUILDING_PROMPT_TEXT)
 
