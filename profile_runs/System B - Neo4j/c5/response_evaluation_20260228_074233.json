@@ -1,0 +1,66 @@
+{
+  "timestamp": "2026-02-28T07:42:33.084542",
+  "input_message": "Which rooms are adjacent to the bathroom?",
+  "number_of_runs": 5,
+  "execution_times": {
+    "mean": 6.530509805679321,
+    "median": 6.468552112579346,
+    "std_dev": 0.5053628928960301,
+    "min": 6.0540947914123535,
+    "max": 7.322703838348389,
+    "all_times": [
+      7.322703838348389,
+      6.0540947914123535,
+      6.468552112579346,
+      6.147696256637573,
+      6.659502029418945
+    ]
+  },
+  "response_similarity": {
+    "average_similarity": 1.0,
+    "similarity_matrix": [
+      [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    ]
+  },
+  "responses": [
+    "I don't know the answer.",
+    "I don't know the answer.",
+    "I don't know the answer.",
+    "I don't know the answer.",
+    "I don't know the answer."
+  ]
+}

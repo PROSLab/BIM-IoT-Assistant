@@ -1,0 +1,66 @@
+{
+  "timestamp": "2026-02-28T07:39:59.143116",
+  "input_message": "Can you provide some details about the walls between the Kitchen and the Toilet?",
+  "number_of_runs": 5,
+  "execution_times": {
+    "mean": 7.499047374725341,
+    "median": 7.658797979354858,
+    "std_dev": 0.5796872260151927,
+    "min": 6.659952878952026,
+    "max": 8.017212867736816,
+    "all_times": [
+      7.658797979354858,
+      7.171552896499634,
+      7.987720251083374,
+      6.659952878952026,
+      8.017212867736816
+    ]
+  },
+  "response_similarity": {
+    "average_similarity": 0.9999999999999994,
+    "similarity_matrix": [
+      [
+        0.9999999999999994,
+        0.9999999999999994,
+        0.9999999999999994,
+        0.9999999999999994,
+        0.9999999999999994
+      ],
+      [
+        0.9999999999999994,
+        0.9999999999999994,
+        0.9999999999999994,
+        0.9999999999999994,
+        0.9999999999999994
+      ],
+      [
+        0.9999999999999994,
+        0.9999999999999994,
+        0.9999999999999994,
+        0.9999999999999994,
+        0.9999999999999994
+      ],
+      [
+        0.9999999999999994,
+        0.9999999999999994,
+        0.9999999999999994,
+        0.9999999999999994,
+        0.9999999999999994
+      ],
+      [
+        0.9999999999999994,
+        0.9999999999999994,
+        0.9999999999999994,
+        0.9999999999999994,
+        0.9999999999999994
+      ]
+    ]
+  },
+  "responses": [
+    "There are two walls between the Kitchen and the Toilet. The first wall is a Basic Wall:Generic - 260mm - External with the name \"Basic Wall:Generic - 260mm - External:317856\" and batid 317856. The second wall has batid 318659.",
+    "There are two walls between the Kitchen and the Toilet. The first wall is a Basic Wall:Generic - 260mm - External with the name \"Basic Wall:Generic - 260mm - External:317856\" and batid 317856. The second wall has batid 318659.",
+    "There are two walls between the Kitchen and the Toilet. The first wall is a Basic Wall:Generic - 260mm - External with the name \"Basic Wall:Generic - 260mm - External:317856\" and batid 317856. The second wall has batid 318659.",
+    "There are two walls between the Kitchen and the Toilet. The first wall is a Basic Wall:Generic - 260mm - External with the name \"Basic Wall:Generic - 260mm - External:317856\" and batid 317856. The second wall has batid 318659.",
+    "There are two walls between the Kitchen and the Toilet. The first wall is a Basic Wall:Generic - 260mm - External with the name \"Basic Wall:Generic - 260mm - External:317856\" and batid 317856. The second wall has batid 318659."
+  ]
+}

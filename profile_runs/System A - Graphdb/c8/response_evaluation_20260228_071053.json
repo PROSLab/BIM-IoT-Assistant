@@ -1,0 +1,66 @@
+{
+  "timestamp": "2026-02-28T07:10:53.443033",
+  "input_message": "Where are located the humidity sensors?",
+  "number_of_runs": 5,
+  "execution_times": {
+    "mean": 7.288113594055176,
+    "median": 7.499838829040527,
+    "std_dev": 0.46665432791219313,
+    "min": 6.510916233062744,
+    "max": 7.650557041168213,
+    "all_times": [
+      7.202243089675903,
+      7.499838829040527,
+      7.577012777328491,
+      6.510916233062744,
+      7.650557041168213
+    ]
+  },
+  "response_similarity": {
+    "average_similarity": 1.0,
+    "similarity_matrix": [
+      [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    ]
+  },
+  "responses": [
+    "I don't know the answer.",
+    "I don't know the answer.",
+    "I don't know the answer.",
+    "I don't know the answer.",
+    "I don't know the answer."
+  ]
+}

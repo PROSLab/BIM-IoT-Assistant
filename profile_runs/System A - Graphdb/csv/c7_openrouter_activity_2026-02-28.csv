@@ -1,0 +1,16 @@
+generation_id,created_at,cost_total,cost_web_search,cost_cache,cost_file_processing,byok_usage_inference,tokens_prompt,tokens_completion,tokens_reasoning,tokens_cached,model_permaslug,provider_name,variant,cancelled,streamed,user,finish_reason_raw,finish_reason_normalized,generation_time_ms,time_to_first_token_ms,app_name,api_key_name
+gen-1772258844-TQyXkZGnxcNMYCHxIACc,2026-02-28 06:07:24.163,0.001378,,,0,0,389,15,0,0,anthropic/claude-4.5-sonnet-20250929,Google,standard,false,true,,stop,stop,1387,1128,,BIM+IOT Assistant Proto
+gen-1772258840-8Hlc3guSYW67bPyWdIFX,2026-02-28 06:07:20.253,0.022993,,,0,0,6907,167,0,0,anthropic/claude-4.5-sonnet-20250929,Google,standard,false,true,,stop,stop,3390,1464,,BIM+IOT Assistant Proto
+gen-1772258838-3bWj83FNPsPuicgRAl1i,2026-02-28 06:07:18.557,0.00288,,,0,0,750,44,0,0,anthropic/claude-4.5-sonnet-20250929,Google,standard,false,true,,stop,stop,1613,1163,,BIM+IOT Assistant Proto
+gen-1772258837-D6aXWXqNQDxVppfBWu1U,2026-02-28 06:07:17.060,0.001378,,,0,0,389,15,0,0,anthropic/claude-4.5-sonnet-20250929,Google,standard,false,true,,stop,stop,1412,1156,,BIM+IOT Assistant Proto
+gen-1772258833-TSNilgwW9TCQrPuAhx38,2026-02-28 06:07:13.396,0.022756,,,0,0,6907,151,0,0,anthropic/claude-4.5-sonnet-20250929,Google,standard,false,true,,stop,stop,3149,1240,,BIM+IOT Assistant Proto
+gen-1772258832-qrhlrp9f5lbXIo8eaj8x,2026-02-28 06:07:12.252,0.00288,,,0,0,750,44,0,0,anthropic/claude-4.5-sonnet-20250929,Google,standard,false,true,,stop,stop,1057,607,,BIM+IOT Assistant Proto
+gen-1772258830-QVaGEwcl7UNAI2mtw8oN,2026-02-28 06:07:10.754,0.001378,,,0,0,389,15,0,0,anthropic/claude-4.5-sonnet-20250929,Google,standard,false,true,,stop,stop,1415,1160,,BIM+IOT Assistant Proto
+gen-1772258826-Img2RyA6y4qMyow8mdmi,2026-02-28 06:07:06.770,0.022993,,,0,0,6907,167,0,0,anthropic/claude-4.5-sonnet-20250929,Google,standard,false,true,,stop,stop,3466,1442,,BIM+IOT Assistant Proto
+gen-1772258825-OuMaM9DS7vjqQo4WuDwf,2026-02-28 06:07:05.058,0.00288,,,0,0,750,44,0,0,anthropic/claude-4.5-sonnet-20250929,Google,standard,false,true,,stop,stop,1615,1166,,BIM+IOT Assistant Proto
+gen-1772258823-WYAGT7GbNJJ92l7hMcSs,2026-02-28 06:07:03.612,0.001378,,,0,0,389,15,0,0,anthropic/claude-4.5-sonnet-20250929,Google,standard,false,true,,stop,stop,1373,1113,,BIM+IOT Assistant Proto
+gen-1772258819-NsJjQGeTtki1sZdEJdz3,2026-02-28 06:06:59.887,0.022756,,,0,0,6907,151,0,0,anthropic/claude-4.5-sonnet-20250929,Google,standard,false,true,,stop,stop,3191,1276,,BIM+IOT Assistant Proto
+gen-1772258818-aRCWs2NpBJU0Tludjzln,2026-02-28 06:06:58.227,0.00288,,,0,0,750,44,0,0,anthropic/claude-4.5-sonnet-20250929,Google,standard,false,true,,stop,stop,1589,1139,,BIM+IOT Assistant Proto
+gen-1772258816-o3Uvhr655D9sEi0TgUvk,2026-02-28 06:06:56.765,0.001378,,,0,0,389,15,0,0,anthropic/claude-4.5-sonnet-20250929,Google,standard,false,true,,stop,stop,1388,1123,,BIM+IOT Assistant Proto
+gen-1772258812-c79OVvWm5BIF7XoxqJ7b,2026-02-28 06:06:52.796,0.022785,,,0,0,6907,153,0,0,anthropic/claude-4.5-sonnet-20250929,Google,standard,false,true,,stop,stop,3426,1340,,BIM+IOT Assistant Proto
+gen-1772258811-WjrPYqNyeGY8q2ogZ6bD,2026-02-28 06:06:50.916,0.00288,,,0,0,750,44,0,0,anthropic/claude-4.5-sonnet-20250929,Google,standard,false,true,,stop,stop,1647,1201,,BIM+IOT Assistant Proto

@@ -1,0 +1,66 @@
+{
+  "timestamp": "2026-02-28T06:22:41.195860",
+  "input_message": "Which rooms are in the first floor?",
+  "number_of_runs": 5,
+  "execution_times": {
+    "mean": 9.564866065979004,
+    "median": 9.594690799713135,
+    "std_dev": 0.7214715942800497,
+    "min": 8.454239130020142,
+    "max": 10.418737173080444,
+    "all_times": [
+      10.418737173080444,
+      9.462857007980347,
+      8.454239130020142,
+      9.893806219100952,
+      9.594690799713135
+    ]
+  },
+  "response_similarity": {
+    "average_similarity": 1.0000000000000007,
+    "similarity_matrix": [
+      [
+        1.0000000000000009,
+        1.0000000000000009,
+        1.0000000000000009,
+        1.0000000000000009,
+        1.0000000000000009
+      ],
+      [
+        1.0000000000000009,
+        1.0000000000000009,
+        1.0000000000000009,
+        1.0000000000000009,
+        1.0000000000000009
+      ],
+      [
+        1.0000000000000009,
+        1.0000000000000009,
+        1.0000000000000009,
+        1.0000000000000009,
+        1.0000000000000009
+      ],
+      [
+        1.0000000000000009,
+        1.0000000000000009,
+        1.0000000000000009,
+        1.0000000000000009,
+        1.0000000000000009
+      ],
+      [
+        1.0000000000000009,
+        1.0000000000000009,
+        1.0000000000000009,
+        1.0000000000000009,
+        1.0000000000000009
+      ]
+    ]
+  },
+  "responses": [
+    "The rooms in the first floor are Living, Bedroom, Hall, Staircase, Toilet, Bathroom, Dining, Kitchen, and Room.",
+    "The rooms in the first floor are Living, Bedroom, Hall, Staircase, Toilet, Bathroom, Dining, Kitchen, and Room.",
+    "The rooms in the first floor are Living, Bedroom, Hall, Staircase, Toilet, Bathroom, Dining, Kitchen, and Room.",
+    "The rooms in the first floor are Living, Bedroom, Hall, Staircase, Toilet, Bathroom, Dining, Kitchen, and Room.",
+    "The rooms in the first floor are Living, Bedroom, Hall, Staircase, Toilet, Bathroom, Dining, Kitchen, and Room."
+  ]
+}

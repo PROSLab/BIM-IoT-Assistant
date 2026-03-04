@@ -1,0 +1,66 @@
+{
+  "timestamp": "2026-02-28T07:35:43.013712",
+  "input_message": "Which rooms are in the first floor?",
+  "number_of_runs": 5,
+  "execution_times": {
+    "mean": 6.938871717453003,
+    "median": 7.084436893463135,
+    "std_dev": 0.476334528881917,
+    "min": 6.129624128341675,
+    "max": 7.301102638244629,
+    "all_times": [
+      7.084436893463135,
+      6.923977851867676,
+      7.301102638244629,
+      6.129624128341675,
+      7.2552170753479
+    ]
+  },
+  "response_similarity": {
+    "average_similarity": 1.0000000000000002,
+    "similarity_matrix": [
+      [
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002
+      ],
+      [
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002
+      ],
+      [
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002
+      ],
+      [
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002
+      ],
+      [
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002
+      ]
+    ]
+  },
+  "responses": [
+    "The rooms in the first floor (Level 1) are: Bathroom, Dining, Room, Toilet, Staircase, Kitchen, Bedroom, Living, and Hall.",
+    "The rooms in the first floor (Level 1) are: Bathroom, Dining, Room, Toilet, Staircase, Kitchen, Bedroom, Living, and Hall.",
+    "The rooms in the first floor (Level 1) are: Bathroom, Dining, Room, Toilet, Staircase, Kitchen, Bedroom, Living, and Hall.",
+    "The rooms in the first floor (Level 1) are: Bathroom, Dining, Room, Toilet, Staircase, Kitchen, Bedroom, Living, and Hall.",
+    "The rooms in the first floor (Level 1) are: Bathroom, Dining, Room, Toilet, Staircase, Kitchen, Bedroom, Living, and Hall."
+  ]
+}

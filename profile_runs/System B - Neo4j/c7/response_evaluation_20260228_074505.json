@@ -1,0 +1,66 @@
+{
+  "timestamp": "2026-02-28T07:45:05.114223",
+  "input_message": "How many humidity sensors are installed in the building?",
+  "number_of_runs": 5,
+  "execution_times": {
+    "mean": 5.213318681716919,
+    "median": 5.2867751121521,
+    "std_dev": 0.5426643239613859,
+    "min": 4.351744174957275,
+    "max": 5.795862197875977,
+    "all_times": [
+      5.795862197875977,
+      5.2867751121521,
+      5.129364967346191,
+      5.502846956253052,
+      4.351744174957275
+    ]
+  },
+  "response_similarity": {
+    "average_similarity": 1.0000000000000002,
+    "similarity_matrix": [
+      [
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002
+      ],
+      [
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002
+      ],
+      [
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002
+      ],
+      [
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002
+      ],
+      [
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002
+      ]
+    ]
+  },
+  "responses": [
+    "There are 9 humidity sensors installed in the building.",
+    "There are 9 humidity sensors installed in the building.",
+    "There are 9 humidity sensors installed in the building.",
+    "There are 9 humidity sensors installed in the building.",
+    "There are 9 humidity sensors installed in the building."
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "timestamp": "2026-02-28T06:57:05.011306",
+  "input_message": "Which rooms are adjacent to the bathroom?",
+  "number_of_runs": 5,
+  "execution_times": {
+    "mean": 9.267879390716553,
+    "median": 9.124674797058105,
+    "std_dev": 0.4410788981076065,
+    "min": 8.91515326499939,
+    "max": 9.965841293334961,
+    "all_times": [
+      9.965841293334961,
+      9.124674797058105,
+      8.91515326499939,
+      9.417582750320435,
+      8.916144847869873
+    ]
+  },
+  "response_similarity": {
+    "average_similarity": 1.0000000000000002,
+    "similarity_matrix": [
+      [
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002
+      ],
+      [
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002
+      ],
+      [
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002
+      ],
+      [
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002
+      ],
+      [
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002,
+        1.0000000000000002
+      ]
+    ]
+  },
+  "responses": [
+    "The rooms adjacent to the bathroom are Hall, Bedroom, Living, Staircase, Toilet, Dining, Kitchen, and Room.",
+    "The rooms adjacent to the bathroom are Hall, Bedroom, Living, Staircase, Toilet, Dining, Kitchen, and Room.",
+    "The rooms adjacent to the bathroom are Hall, Bedroom, Living, Staircase, Toilet, Dining, Kitchen, and Room.",
+    "The rooms adjacent to the bathroom are Hall, Bedroom, Living, Staircase, Toilet, Dining, Kitchen, and Room.",
+    "The rooms adjacent to the bathroom are Hall, Bedroom, Living, Staircase, Toilet, Dining, Kitchen, and Room."
+  ]
+}
